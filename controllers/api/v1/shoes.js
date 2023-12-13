@@ -88,6 +88,27 @@ const createShoe = async (req, res) => {
     }
 };
 
+//delete a shoe by id
+//NEEDS AUHTENTICATION LATER ON
+const deleteShoeById = async (req, res) => {
+    try{
+        let shoe = await Shoes.findByIdAndDelete(req.params.id);
+        res.json({
+            status: "success",
+            message: "Shoe deleted",
+            data: [{
+                shoe: shoe,
+            }],
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "Shoe not deleted",
+        });
+    }
+};
+
 module.exports.createShoe = createShoe;
 module.exports.getAllShoes = getAllShoes;
 module.exports.getShoeById = getShoeById;
+module.exports.deleteShoeById = deleteShoeById;
