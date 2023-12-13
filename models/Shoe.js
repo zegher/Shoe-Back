@@ -34,6 +34,10 @@ const ShoeSchema = new Schema({
     type: Number,
     required: true,
   },
+  status: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,

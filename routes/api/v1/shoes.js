@@ -9,5 +9,6 @@ router.post("/", shoesController.createShoe);
 router.get("/", shoesController.getAllShoes);
 router.get("/:id", shoesController.getShoeById);
 router.delete("/:id", shoesController.deleteShoeById);
+router.put("/:id", shoesController.putShoeById);
 
 module.exports = router;

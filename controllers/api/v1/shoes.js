@@ -59,6 +59,7 @@ const createShoe = async (req, res) => {
         s.insideColor = shoe.insideColor;
         s.outside_1Color = shoe.outside_1Color;
         s.outside_2Color = shoe.outside_2Color;
+        s.status = shoe.status;
         s.size = shoe.size;
         s.price = shoe.price;
         await s.save();
@@ -75,6 +76,7 @@ const createShoe = async (req, res) => {
                     insideColor: s.insideColor,
                     outside_1Color: s.outside_1Color,
                     outside_2Color: s.outside_2Color,
+                    status: s.status,
                     size: s.size,
                     price: s.price,
                 }
@@ -93,6 +95,7 @@ const createShoe = async (req, res) => {
 const deleteShoeById = async (req, res) => {
     try{
         let shoe = await Shoes.findByIdAndDelete(req.params.id);
+        s.status = shoe.status;
         res.json({
             status: "success",
             message: "Shoe deleted",
@@ -108,7 +111,30 @@ const deleteShoeById = async (req, res) => {
     }
 };
 
+//put a shoe by id (update status to delivered)
+//NEEDS AUTHENTICATION LATER ON
+const putShoeById = async (req, res) => {
+    try{
+        let shoe = await Shoes.findByIdAndUpdate(req.params.id);
+        shoe.status = "delivered";
+        await shoe.save();
+        res.json({
+            status: "success",
+            message: "Shoe updated",
+            data: [{
+                shoe: shoe,
+            }],
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "Shoe not updated",
+        });
+    }
+};
+
 module.exports.createShoe = createShoe;
 module.exports.getAllShoes = getAllShoes;
 module.exports.getShoeById = getShoeById;
 module.exports.deleteShoeById = deleteShoeById;
+module.exports.putShoeById = putShoeById;
