@@ -1,7 +1,7 @@
-//create a mongoose schema for shoes
+//create a mongoose schema for Users
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ShoeSchema = new Schema({
+const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -12,5 +12,5 @@ const ShoeSchema = new Schema({
   }
 });
 //export the model to use it in index.js
-const Shoes = mongoose.model('Shoes', ShoeSchema);
-module.exports = Shoes;
+const Users = mongoose.model('Users', UserSchema);
+module.exports = Users;
