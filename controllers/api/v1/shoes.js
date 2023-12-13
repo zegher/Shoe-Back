@@ -19,6 +19,27 @@ const getAllShoes = async (req, res) => {
     }
 };
 
+//controller function for getting a shoe by id
+const getShoeById = async (req, res) => {
+    try{
+        let shoe = await Shoes.findById(req.params.id);
+        let shoeOrders = await Shoes.find({shoe: shoe._id});
+
+        res.json({
+            status: "success",
+            message: "Shoe retrieved",
+            data: [{
+                shoe: shoe,
+            }],
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "Shoe not retrieved",
+        });
+    }
+};
+
 //controller function for creating a new shoe
 const createShoe = async (req, res) => {
     console.log('Request Body:', req.body);
@@ -32,10 +53,12 @@ const createShoe = async (req, res) => {
         }
         let s = new Shoes();
         s.brand = shoe.brand;
-        s.color = shoe.color;
         s.lacesColor = shoe.lacesColor;
-        s.soleColor = shoe.soleColor;
-        s.logoColor = shoe.logoColor;
+        s.sole_1Color = shoe.sole_1Color;
+        s.sole_2Color = shoe.sole_2Color;
+        s.insideColor = shoe.insideColor;
+        s.outside_1Color = shoe.outside_1Color;
+        s.outside_2Color = shoe.outside_2Color;
         s.size = shoe.size;
         s.price = shoe.price;
         await s.save();
@@ -46,22 +69,25 @@ const createShoe = async (req, res) => {
             data: [
                 {
                     brand: s.brand,
-                    color: s.color,
                     lacesColor: s.lacesColor,
-                    soleColor: s.soleColor,
-                    logoColor: s.logoColor,
+                    sole_1Color: s.sole_1Color,
+                    sole_2Color: s.sole_2Color,
+                    insideColor: s.insideColor,
+                    outside_1Color: s.outside_1Color,
+                    outside_2Color: s.outside_2Color,
                     size: s.size,
-                    price: s.price, 
+                    price: s.price,
                 }
             ]
         });
     } catch (err) {
         res.json({
             status: "error",
-            message: "Shoe not created",
+            message: err.message || "Shoe not created"
         });
     }
 };
 
 module.exports.createShoe = createShoe;
 module.exports.getAllShoes = getAllShoes;
+module.exports.getShoeById = getShoeById;

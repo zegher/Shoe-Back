@@ -7,5 +7,6 @@ const shoesController = require("../../../controllers/api/v1/shoes");
 
 router.post("/", shoesController.createShoe);
 router.get("/", shoesController.getAllShoes);
+router.get("/:id", shoesController.getShoeById);
 
 module.exports = router;

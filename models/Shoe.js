@@ -6,19 +6,27 @@ const ShoeSchema = new Schema({
     type: String,
     required: true,
   },
-  color: {
-    type: String,
-    required: true,
-  },
   lacesColor: {
     type: String,
     required: true,
   },
-  soleColor: {
+  sole_1Color: {
     type: String,
     required: true,
   },
-  logoColor: {
+  sole_2Color: {
+    type: String,
+    required: true,
+  },
+  insideColor: {
+    type: String,
+    required: true,
+  },
+  outside_1Color: {
+    type: String,
+    required: true,
+  },
+  outside_2Color: {
     type: String,
     required: true,
   },
