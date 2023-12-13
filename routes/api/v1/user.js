@@ -6,5 +6,6 @@ const router = express.Router();
 const userController = require("../../../controllers/api/v1/users");
 
 router.get("/", userController.getAllUsers);
+router.post("/", userController.postUser);
 
 module.exports = router;
