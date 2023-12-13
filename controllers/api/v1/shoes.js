@@ -21,8 +21,9 @@ const getAllShoes = async (req, res) => {
 
 //controller function for creating a new shoe
 const createShoe = async (req, res) => {
+    console.log('Request Body:', req.body);
     try{
-        let shoe = req.body.shoe;
+        let shoe = req.body;
         if (!shoe) {
             return res.status(400).json({
                 status: "error",
