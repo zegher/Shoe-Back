@@ -49,6 +49,37 @@ const postUser = async (req, res) => {
     }
 }
 
+const putUserPasswordById = async (req, res) => {
+    try {
+        let user = await Users.findById(req.params.id);
+
+        if (!user) {
+            return res.status(404).json({
+                status: "error",
+                message: "User not found",
+            });
+        }
+
+        // Update the existing user's password
+        user.password = req.body.password;
+        await user.save();
+
+        res.json({
+            status: "success",
+            message: "User password updated",
+            data: [{
+                user: user,
+            }],
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: "error",
+            message: "User password not updated",
+        });
+    }
+};
+
 module.exports.getAllUsers = getAllUsers;
 module.exports.postUser = postUser;
+module.exports.putUserPasswordById = putUserPasswordById;
 
