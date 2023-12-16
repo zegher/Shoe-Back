@@ -1,20 +1,6 @@
 //allow access control allow origin
-const cors = require('cors');
 const Shoes = require("../../../models/Shoe");
-const express = require('express');
-const app = express();
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function(app) {
-  app.use(
-    '/api',
-    createProxyMiddleware({
-      target: 'http://localhost:5000', // this is the API server's address
-      changeOrigin: true,
-    })
-  );
-};
-app.use(cors());
 
 //controller function for getting all shoes
 const getAllShoes = async (req, res) => {
