@@ -3,6 +3,7 @@ const cors = require('cors');
 const Shoes = require("../../../models/Shoe");
 const express = require('express');
 const app = express();
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 app.use(cors());
 
