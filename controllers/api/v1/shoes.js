@@ -1,4 +1,3 @@
-const Shoes = require("../../../models/Shoe");
 //allow access control allow origin
 const cors = require('cors');
 const Shoes = require("../../../models/Shoe");
