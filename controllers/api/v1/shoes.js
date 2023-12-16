@@ -1,4 +1,11 @@
 const Shoes = require("../../../models/Shoe");
+//allow access control allow origin
+const cors = require('cors');
+const Shoes = require("../../../models/Shoe");
+const express = require('express');
+const app = express();
+
+app.use(cors());
 
 //controller function for getting all shoes
 const getAllShoes = async (req, res) => {
