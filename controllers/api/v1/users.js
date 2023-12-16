@@ -79,6 +79,7 @@ const putUserPasswordById = async (req, res) => {
     }
 };
 
+
 module.exports.getAllUsers = getAllUsers;
 module.exports.postUser = postUser;
 module.exports.putUserPasswordById = putUserPasswordById;
