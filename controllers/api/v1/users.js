@@ -1,4 +1,30 @@
 const Users = require("../../../models/User");
+const express = require('express');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+//login router
+const router = express.Router();
+router.post('/login', async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!validPassword) {
+            return res.status(400).json({ message: 'Invalid password' });
+        }
+
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token: token });
+
+    } catch (err) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 //controller functino for getting al users
 const getAllUsers = async (req, res) => {
@@ -116,4 +142,4 @@ module.exports.getAllUsers = getAllUsers;
 module.exports.postUser = postUser;
 module.exports.putUserPasswordById = putUserPasswordById;
 module.exports.getUserById = getUserById;
-
+module.exports = router;
