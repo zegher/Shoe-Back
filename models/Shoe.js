@@ -2,6 +2,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ShoeSchema = new Schema({
+  image: {
+    type: String,
+    required: false,
+  },
   brand: {
     type: String,
     required: true,

@@ -54,6 +54,7 @@ const createShoe = async (req, res) => {
             });
         }
         let s = new Shoes();
+        s.image = shoe.image;
         s.brand = shoe.brand;
         s.lacesColor = shoe.lacesColor;
         s.sole_1Color = shoe.sole_1Color;
