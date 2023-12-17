@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 //login router
-router.post('/login', async (req, res) => {
+const login = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: 'Server error' });
     }
-});
+};
 
 
 //controller functino for getting al users
@@ -142,4 +142,4 @@ module.exports.getAllUsers = getAllUsers;
 module.exports.postUser = postUser;
 module.exports.putUserPasswordById = putUserPasswordById;
 module.exports.getUserById = getUserById;
-module.exports = router;
+module.exports.login = login;
