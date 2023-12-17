@@ -33,6 +33,10 @@ const postUser = async (req, res) => {
         let u = new Users();
         u.username = user.username;
         u.password = user.password;
+        u.email = user.email;
+        u.shoeSize = user.shoeSize;
+        u.adress = user.adress;
+        u.country = user.country;
         await u.save();
         res.json({
             status: "success",
