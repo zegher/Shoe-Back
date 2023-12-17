@@ -37,6 +37,7 @@ const postUser = async (req, res) => {
         u.shoeSize = user.shoeSize;
         u.adress = user.adress;
         u.country = user.country;
+        u.admin = user.admin;
         await u.save();
         res.json({
             status: "success",
@@ -61,6 +62,14 @@ const putUserPasswordById = async (req, res) => {
             return res.status(404).json({
                 status: "error",
                 message: "User not found",
+            });
+        }
+
+        //if user is not admin
+        if (!user.admin) {
+            return res.status(401).json({
+                status: "error",
+                message: "User is not authorized to update password",
             });
         }
 

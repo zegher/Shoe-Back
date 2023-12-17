@@ -27,7 +27,11 @@ const Userschema = new Schema({
     type: String,
     required: true,
   },
-  
+  //admin
+  admin: {
+    type: Boolean,
+    required: true,
+  },
 });
 //export the model to use it in index.js
 const Users = mongoose.model('Users', Userschema);
