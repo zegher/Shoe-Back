@@ -92,8 +92,28 @@ const putUserPasswordById = async (req, res) => {
     }
 };
 
+//get user by id
+//NEEDS AUTHENTICATION LATER ON
+const getUserById = async (req, res) => {
+    try{
+        let user = await Users.findById(req.params.id);
+        res.json({
+            status: "success",
+            message: "User retrieved",
+            data: [{
+                user: user,
+            }],
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "User not retrieved",
+        });
+    }
+};
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.postUser = postUser;
 module.exports.putUserPasswordById = putUserPasswordById;
+module.exports.getUserById = getUserById;
 
