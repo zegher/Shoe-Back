@@ -8,7 +8,7 @@ const userController = require("../../../controllers/api/v1/users");
 router.get("/", userController.getAllUsers);
 router.post("/", userController.postUser);
 router.put("/:id", userController.putUserPasswordById);
-router.put("/:id", userController.getUserById);
+router.get("/:id", userController.getUserById); // Changed from router.put() to router.get()
 router.post("/login", userController.login);
 
 module.exports = router;
