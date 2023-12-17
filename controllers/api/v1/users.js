@@ -4,26 +4,56 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-//login router for username and password
 const login = async (req, res) => {
-    try {
-        const user = await User.findOne({ username: req.body.username });
+//make a login function based on username and password of the api using a try catch
+try {
+        // Find user by username
+        const user = await Users.findOne({ username: req.body.username });
+
+        // If user not found, send error response
         if (!user) {
-            return res.status(400).json({ message: 'User not found' });
+            return res.status(400).json({
+                status: "error",
+                message: "User not found",
+            });
         }
 
-        const validPassword = await bcrypt.compare(req.body.password, user.password);
-        if (!validPassword) {
-            return res.status(400).json({ message: 'Invalid password' });
+        // Compare provided password with stored hashed password
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+
+        // If password doesn't match, send error response
+        if (!isMatch) {
+            return res.status(400).json({
+                status: "error",
+                message: "Invalid credentials",
+            });
         }
 
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token: token });
+        // If password matches, create and sign a JWT
+        const payload = {
+            user: {
+                id: user.id,
+            },
+        };
 
+        jwt.sign(
+            payload,
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' },
+            (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+            }
+        );
     } catch (err) {
-        res.status(500).json({ message: 'Server error' });
+        console.error(err);
+        res.status(500).json({
+            status: "error",
+            message: "Server error",
+        });
     }
 };
+
 
 
 //controller functino for getting al users
