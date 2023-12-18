@@ -11,6 +11,6 @@ router.get("/:id", shoesController.getShoeById);
 router.delete("/:id", shoesController.deleteShoeById);
 router.put("/:id", shoesController.putShoeById);
 
-router.put('/:id', shoesController.updateStatus);
+router.put('/:_id', shoesController.updateStatus);
 
 module.exports = router;
