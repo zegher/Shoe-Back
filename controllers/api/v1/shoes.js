@@ -140,10 +140,15 @@ const updateStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
+    console.log(`id: ${id}`);
+    console.log(`status: ${status}`);
+
     try {
         const updatedShoe = await Shoes.findByIdAndUpdate(id, { status }, { new: true });
+        console.log(`updatedShoe: ${updatedShoe}`);
         res.json(updatedShoe);
     } catch (err) {
+        console.log(`error: ${err.message}`);
         res.status(500).json({ message: err.message });
     }
 }
