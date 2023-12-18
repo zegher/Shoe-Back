@@ -5,8 +5,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const login = async (req, res) => {
-//make a login function based on username and password of the api using a try catch
-try {
+    try {
         // Find user by username
         const user = await Users.findOne({ username: req.body.username });
 
@@ -18,8 +17,8 @@ try {
             });
         }
 
-        // Compare provided password with stored hashed password
-        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        // Compare provided password with stored password
+        const isMatch = req.body.password === user.password;
 
         // If password doesn't match, send error response
         if (!isMatch) {
