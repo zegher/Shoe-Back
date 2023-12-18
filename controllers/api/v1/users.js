@@ -9,7 +9,6 @@ const login = async (req, res) => {
     try {
         // Find user by username
         const user = await Users.findOne({ username: req.body.username });
-
         // If user not found, send error response
         if (!user) {
             return res.status(400).json({
@@ -17,10 +16,8 @@ const login = async (req, res) => {
                 message: "User not found",
             });
         }
-
         // Compare provided password with stored password
         const isMatch = req.body.password === user.password;
-
         // If password doesn't match, send error response
         if (!isMatch) {
             return res.status(400).json({
@@ -28,14 +25,12 @@ const login = async (req, res) => {
                 message: "Invalid credentials",
             });
         }
-
         // If password matches, create and sign a JWT
         const payload = {
             user: {
                 id: user.id,
             },
         };
-
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
