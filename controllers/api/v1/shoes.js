@@ -136,7 +136,7 @@ const putShoeById = async (req, res) => {
 };
 
 //change shoe status
-exports.updateStatus = async (req, res) => {
+const updateStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
@@ -146,7 +146,7 @@ exports.updateStatus = async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
-};
+}
 
 module.exports.createShoe = createShoe;
 module.exports.getAllShoes = getAllShoes;
