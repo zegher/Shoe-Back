@@ -1,7 +1,6 @@
 //allow access control allow origin
 const Shoes = require("../../../models/Shoe");
 
-
 //controller function for getting all shoes
 const getAllShoes = async (req, res) => {
     try{
@@ -136,8 +135,23 @@ const putShoeById = async (req, res) => {
     }
 };
 
+//change shoe status
+exports.updateStatus = async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    try {
+        const updatedShoe = await Shoes.findByIdAndUpdate(id, { status }, { new: true });
+        res.json(updatedShoe);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 module.exports.createShoe = createShoe;
 module.exports.getAllShoes = getAllShoes;
 module.exports.getShoeById = getShoeById;
 module.exports.deleteShoeById = deleteShoeById;
 module.exports.putShoeById = putShoeById;
+
+module.exports.updateStatus = updateStatus;
