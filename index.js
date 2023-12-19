@@ -10,6 +10,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const Primus = require('primus');
+const primus = new Primus(server, { transformer: 'websockets' });
+
+
 // connect to mongodb
 mongoose.connect(process.env.MONGODB);
 
