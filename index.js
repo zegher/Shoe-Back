@@ -1,3 +1,5 @@
+// import dependencies
+
 require('dotenv').config();
 
 const express = require("express");
@@ -5,11 +7,9 @@ const mongoose = require("mongoose");
 const cors = require('cors');
 
 const app = express();
-const port = 3000;
 
 app.use(express.json());
 app.use(cors());
-
 
 // connect to mongodb
 mongoose.connect(process.env.MONGODB);
@@ -20,6 +20,7 @@ console.log(process.env.MONGODB);
 // check if connection works
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => console.log("Connected to MongoDB"));
 
 //import routes
 const shoesRoutes = require("./routes/api/v1/shoes");
@@ -28,8 +29,5 @@ app.use(express.json());
 
 //use routes
 app.use("/api/v1/shoes", shoesRoutes);
-app.use("/api/v1/users", userRoutes);
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+module.exports = app; // Export the app object
