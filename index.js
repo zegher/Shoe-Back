@@ -28,5 +28,6 @@ app.use(express.json());
 
 //use routes
 app.use("/api/v1/shoes", shoesRoutes);
+app.use("/api/v1/user", userRoutes);
 
 module.exports = app; // Export the app object
