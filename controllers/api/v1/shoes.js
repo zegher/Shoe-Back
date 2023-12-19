@@ -57,13 +57,13 @@ const createShoe = async (req, res) => {
         
         //emit websocket message to all connected clients
         req.app.locals.primus.write({
-            // status: "success",
+            status: "success",
             message: "Hieeeeeeeeeeeeeeeeeloo",
-            // data: {
-            //     shoeOrder: newShoeOrder,
-            // }
+            data: {
+                shoe: shoe,
+            }
         });
-
+        
         let s = new Shoes();
         // s.image = shoe.image;
         s.brand = shoe.brand;
