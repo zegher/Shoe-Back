@@ -17,8 +17,7 @@ function initialize(server) {
         // Enhance logging to include content of data being sent
         console.log('Data sent through WebSocket:', data);
     });
-});
-
+  });
 
   return primus;
 }

@@ -46,11 +46,9 @@ const createShoe = async (req, res) => {
     console.log('Request Body:', req.body);
     try{
         let shoe = req.body;
+        
         const newShoeOrder = new Shoe(shoe);
         await newShoeOrder.save();
-        
-        // Emit a 'order' event through Primus
-        primus.write('order', newOrder);
 
         res.status(201).json(newOrder);
         if (!shoe) {
@@ -59,14 +57,16 @@ const createShoe = async (req, res) => {
                 message: "Shoe data not provided in the request body",
             });
         }
+        
         //emit websocket message to all connected clients
         req.app.locals.primus.write({
-            status: "success",
-            message: "Shoe order created succesfull",
-            data: {
-                shoeOrder: newShoeOrder,
-            }
+            // status: "success",
+            message: "Hieeeeeeeeeeeeeeeeeloo",
+            // data: {
+            //     shoeOrder: newShoeOrder,
+            // }
         });
+
         let s = new Shoes();
         s.image = shoe.image;
         s.brand = shoe.brand;
