@@ -46,12 +46,8 @@ const createShoe = async (req, res) => {
     console.log('Request Body:', req.body);
     let shoe = req.body;
 
-    try{
-        
-        // const newShoeOrder = new Shoe(shoe);
-        // await newShoeOrder.save();
 
-        res.status(201).json(newOrder);
+    try{       
         if (!shoe) {
             return res.status(400).json({
                 status: "error",
