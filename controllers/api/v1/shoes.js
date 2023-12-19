@@ -48,6 +48,10 @@ const createShoe = async (req, res) => {
         let shoe = req.body;
         const newShoeOrder = new Shoe(shoe);
         await newShoeOrder.save();
+        // Emit a 'order' event through Primus
+        primus.write('order', newOrder);
+
+        res.status(201).json(newOrder);
         if (!shoe) {
             return res.status(400).json({
                 status: "error",
