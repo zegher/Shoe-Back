@@ -44,11 +44,12 @@ const getShoeById = async (req, res) => {
 //controller function for creating a new shoe
 const createShoe = async (req, res) => {
     console.log('Request Body:', req.body);
+    let shoe = req.body;
+
     try{
-        let shoe = req.body;
         
-        const newShoeOrder = new Shoe(shoe);
-        await newShoeOrder.save();
+        // const newShoeOrder = new Shoe(shoe);
+        // await newShoeOrder.save();
 
         res.status(201).json(newOrder);
         if (!shoe) {
@@ -68,7 +69,7 @@ const createShoe = async (req, res) => {
         });
 
         let s = new Shoes();
-        s.image = shoe.image;
+        // s.image = shoe.image;
         s.brand = shoe.brand;
         s.lacesColor = shoe.lacesColor;
         s.sole_1Color = shoe.sole_1Color;
