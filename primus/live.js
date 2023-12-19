@@ -4,6 +4,7 @@ const Primus = require('primus');
 function initialize(server) {
   const primus = new Primus(server, {
     transformer: 'websockets',
+    pingInterval: false,
   });
 
   primus.on('connection', (spark) => {
