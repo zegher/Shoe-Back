@@ -48,6 +48,7 @@ const createShoe = async (req, res) => {
         let shoe = req.body;
         const newShoeOrder = new Shoe(shoe);
         await newShoeOrder.save();
+        
         // Emit a 'order' event through Primus
         primus.write('order', newOrder);
 
@@ -166,6 +167,7 @@ const updateStatus = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 }
+
 
 module.exports.createShoe = createShoe;
 module.exports.getAllShoes = getAllShoes;

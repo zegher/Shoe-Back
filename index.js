@@ -13,7 +13,7 @@ app.use(cors());
 
 const Primus = require('primus');
 const server = http.createServer(app);
-const primus = new Primus(server, { transformer: 'websockets' });
+const primus = new Primus(server, { transformer: 'websockets', pingInterval: false });
 
 
 // connect to mongodb
